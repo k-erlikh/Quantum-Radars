@@ -25,8 +25,8 @@ Status create_tmvs(double* tmsv_state)
 
     tmsv_state[0] = a;
     tmsv_state[5] = a;
-    tmsv_state[10]= a;
-    tmsv_state[15]= a;
+    tmsv_state[10] = a;
+    tmsv_state[15] = a;
 
     tmsv_state[2] = b*cos(phi);
     tmsv_state[8] = b*cos(phi);
@@ -34,9 +34,9 @@ Status create_tmvs(double* tmsv_state)
     tmsv_state[3] = b*sin(phi);
     tmsv_state[6] = b*sin(phi);
     tmsv_state[9] = b*sin(phi);
-    tmsv_state[12]= b*sin(phi);
+    tmsv_state[12] = b*sin(phi);
 
-    tmsv_state[7]  = -b*cos(phi);
+    tmsv_state[7] = -b*cos(phi);
     tmsv_state[13] = -b*cos(phi);
 
     return SUCCESS;
