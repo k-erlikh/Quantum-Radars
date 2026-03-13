@@ -7,8 +7,8 @@ int main()
     int N = 100;
     QuantumRadar q;
     QuantumDetector d;
-    double Rc_totalSamplesSum;
-    double Rs_totalSamplesSum;
+    double Rc_totalSamplesSum = 0;
+    double Rs_totalSamplesSum = 0;
 
     for(int n = 0; n < N; n++)
     {
