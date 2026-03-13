@@ -1,4 +1,3 @@
-
 #include "Status.h"
 #include <random>
 #include <iostream>
@@ -42,14 +41,19 @@ class QuantumRadar
     public:
         QuantumRadar();
         ~QuantumRadar();
+
         Status generateGaussianNorms();
-        Status printGaussianNorms();
         Status generateSignalSamples();
+
         Status setHypothesis(bool b);
         Status setParameters();
+       
+        Signals getSignalSamples();
+
+        Status printGaussianNorms();
 };
 
-#endif
+#endif //QUANTUMRADAR_H
 
 
 

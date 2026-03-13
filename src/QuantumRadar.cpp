@@ -30,7 +30,7 @@ Status QuantumRadar::generateGaussianNorms()
 
 Status QuantumRadar::printGaussianNorms()
 {
-    cout<< gaus.g1 << " " <<gaus.g2 << " " <<gaus.g3 << " " <<gaus.g4 << endl;
+    cout<<"Gaussian Normal Values: " << gaus.g1 << " " <<gaus.g2 << " " <<gaus.g3 << " " <<gaus.g4 << endl;
     return SUCCESS;
 }
 
@@ -62,6 +62,11 @@ Status QuantumRadar::generateSignalSamples()
 
     cout << "Signal Samples: " << sig.i_1 << " " << sig.q_1 << " " << sig.i_2 << " "<< sig.q_2 << endl;
     return SUCCESS;
+}
+
+Signals QuantumRadar::getSignalSamples()
+{
+    return sig;
 }
 
 // [1] D. Luong, “Quantum Radar Signal Processing,” Jan. 2023, doi: https://doi.org/10.22215/etd/2023-15615.

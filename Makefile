@@ -2,14 +2,13 @@ CXX = g++
 CXXFLAGS = -I./include -O2 -Wall
 
 SRC = src/main.cpp src/QuantumRadar.cpp
-TARGET = quant
 
 # Build
-all: $(TARGET)
+all: quant
 
-$(TARGET):
-	$(CXX) $(CXXFLAGS) $(SRC) -o $(TARGET)
+quant:
+	$(CXX) $(CXXFLAGS) $(SRC) -o quant
 
 # Clean
 clean:
-	rm -f $(TARGET)
+	rm -f quant
