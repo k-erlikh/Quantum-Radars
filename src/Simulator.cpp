@@ -3,13 +3,12 @@
 double Simulator::simulateDetector()
 {
     int N = 100;
-    QuantumRadar q;
-    QuantumDetector d;
     double Rc_totalSamplesSum = 0;
     double Rs_totalSamplesSum = 0;
 
     for(int n = 0; n < N; n++)
     {
+        q.setHypothesis(hypothesis);
         q.setParameters();
         q.generateGaussianNorms();
         q.generateSignalSamples();
@@ -34,10 +33,36 @@ Status Simulator::monteCarloSampling(int sampleRate)
 
 Status Simulator::exportDetectorValues()
 {
-    ofstream file("data.txt");
+    string fileName = "";
+    if(q.getHypothesis() == true)
+    {
+        fileName = "data/signalData_H0.csv";
+    }
+    else
+    {
+        fileName = "data/signalData_H1.csv";
+    }
+    ofstream file(fileName);
+    
     for(double n : decetorValues)
     {
         file << n <<endl;
     }
+    return SUCCESS;
+}
+
+QuantumRadar Simulator::getQuantumRadar()
+{
+    return q;
+}
+
+QuantumDetector Simulator::getQuantumDetector()
+{
+    return d;
+}
+
+Status Simulator::setHypothesis(bool hypothesis)
+{
+    hypothesis = hypothesis;
     return SUCCESS;
 }
