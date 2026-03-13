@@ -1,11 +1,14 @@
-CC = gcc
-CFLAGS = -I./include -O2 -Wall
-LIBS = -lopenblas -lm
+CXX = g++
+CXXFLAGS = -I./include -O2 -Wall
 
-#Build
-all:
-	$(CC) $(CFLAGS) src/QuantumRadar.c -o app $(LIBS)
+SRC = src/main.cpp src/QuantumRadar.cpp src/QuantumDetector.cpp src/Simulator.cpp
 
-#Clean
+# Build
+all: quant
+
+quant:
+	$(CXX) $(CXXFLAGS) $(SRC) -o quant
+
+# Clean
 clean:
-	rm -f app
+	rm -f quant
