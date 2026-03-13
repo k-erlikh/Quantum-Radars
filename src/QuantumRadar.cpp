@@ -49,7 +49,7 @@ Status QuantumRadar::setParameters()
         uniform_real_distribution<double> dist(nextafter(0.0, 1.0), nextafter(1.0, 0.0));
         param.rho = dist(gen);
     }
-    cout << "rho: " <<param.rho << endl;
+    // cout << "rho: " <<param.rho << endl;
     return SUCCESS;
 }
 
@@ -60,7 +60,7 @@ Status QuantumRadar::generateSignalSamples()
     sig.i_2 = param.rho * param.sigma_2 * gaus.g1 + sqrt((1-(param.rho*param.rho)))*param.sigma_2 * gaus.g3;
     sig.q_2 = -param.rho * param.sigma_2 * gaus.g2 + sqrt((1-(param.rho*param.rho)))*param.sigma_2 * gaus.g4;
 
-    cout << "Signal Samples: " << sig.i_1 << " " << sig.q_1 << " " << sig.i_2 << " "<< sig.q_2 << endl;
+    // cout << "Signal Samples: " << sig.i_1 << " " << sig.q_1 << " " << sig.i_2 << " "<< sig.q_2 << endl;
     return SUCCESS;
 }
 

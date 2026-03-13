@@ -1,7 +1,7 @@
 CXX = g++
 CXXFLAGS = -I./include -O2 -Wall
 
-SRC = src/main.cpp src/QuantumRadar.cpp src/QuantumDetector.cpp
+SRC = src/main.cpp src/QuantumRadar.cpp src/QuantumDetector.cpp src/Simulator.cpp
 
 # Build
 all: quant
