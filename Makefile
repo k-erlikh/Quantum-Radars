@@ -12,3 +12,5 @@ quant:
 # Clean
 clean:
 	rm -f quant
+	rm -f data/signalData_H0.csv
+	rm -f data/signalData_H1.csv

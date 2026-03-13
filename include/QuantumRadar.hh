@@ -49,6 +49,7 @@ class QuantumRadar
         Status setParameters();
        
         Signals getSignalSamples();
+        bool getHypothesis();
 
         Status printGaussianNorms();
 };

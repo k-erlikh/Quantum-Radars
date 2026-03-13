@@ -13,12 +13,20 @@ class Simulator
 {
     private:
         vector<double> decetorValues;
+        QuantumRadar q;
+        QuantumDetector d;
+        bool hypothesis;
 
     public:
         Status exportDetectorValues();
         Status monteCarloSampling(int sampleRate);
 
         double simulateDetector();
+
+        QuantumRadar getQuantumRadar();
+        QuantumDetector getQuantumDetector();
+
+        Status setHypothesis(bool hypothesis);
 };
 
 #endif
