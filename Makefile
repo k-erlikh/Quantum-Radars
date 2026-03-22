@@ -1,4 +1,4 @@
-SRC = src/main.cpp src/QuantumRadar.cpp src/QuantumDetector.cpp src/Simulator.cpp
+SRC = src/main.cpp src/QuantumRadar.cpp src/QuantumDetector.cpp src/Simulator.cpp src/ClassicalRadar.cpp
 INCLUDES = -I./include
 COMMONFLAGS = $(INCLUDES) -O2 -Wall
 

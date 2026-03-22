@@ -1,22 +1,6 @@
 #include "Status.h"
-#include <random>
+#include "BaseRadar.hh"
 #include <iostream>
-
-typedef struct
-{
-    double i_1;
-    double q_1;
-    double i_2;
-    double q_2;
-} Signals;
-
-typedef struct
-{
-    double g1;
-    double g2;
-    double g3;
-    double g4;
-} GaussianValues;
 
 typedef struct
 {
@@ -29,29 +13,19 @@ typedef struct
 #ifndef QUANTUMRADAR_H
 #define QUANTUMRADAR_H
 
-class QuantumRadar
+class QuantumRadar : public BaseRadar
 {
-    private: 
-        Signals sig;
-        GaussianValues gaus;
+    private:
         Parameters param;
-        
-        bool hypothesisNULL;
     
     public:
         QuantumRadar();
         ~QuantumRadar();
 
-        Status generateGaussianNorms();
         Status generateSignalSamples();
-
-        Status setHypothesis(bool b);
         Status setParameters();
-       
         Signals getSignalSamples();
-        bool getHypothesis();
-
-        Status printGaussianNorms();
+        
 };
 
 #endif //QUANTUMRADAR_H
