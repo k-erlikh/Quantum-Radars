@@ -63,6 +63,6 @@ QuantumDetector Simulator::getQuantumDetector()
 
 Status Simulator::setHypothesis(bool hypothesis)
 {
-    hypothesis = hypothesis;
+    this->hypothesis = hypothesis;
     return SUCCESS;
 }

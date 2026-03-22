@@ -1,8 +1,9 @@
 #include "Status.h"
 #include "QuantumDetector.hh"
 #include "QuantumRadar.hh"
-#include <bits/stdc++.h>
 #include <vector>
+#include <string>
+#include <fstream>
 
 using namespace std;
 
