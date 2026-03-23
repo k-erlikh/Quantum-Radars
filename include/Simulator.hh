@@ -1,6 +1,7 @@
 #include "Status.h"
-#include "QuantumDetector.hh"
+#include "Detector.hh"
 #include "QuantumRadar.hh"
+#include "ClassicalRadar.hh"
 #include <vector>
 #include <string>
 #include <fstream>
@@ -13,19 +14,26 @@ using namespace std;
 class Simulator
 {
     private:
-        vector<double> decetorValues;
+        vector<double> qDecetorValues;
+        vector<double> cDecetorValues;
+
         QuantumRadar q;
-        QuantumDetector d;
+        ClassicalRadar c;
+        Detector d;
+
         bool hypothesis;
 
     public:
-        Status exportDetectorValues();
-        Status monteCarloSampling(int sampleRate);
+        Status exportDetectorValues(string type);
 
-        double simulateDetector();
+        Status monteCarloSamplingQuantum(int sampleRate);
+        Status monteCarloSamplingClassical(int sampleRate);
+
+        double simulateDetectorQuantum();
+        double simulateDetectorClassical();
 
         QuantumRadar getQuantumRadar();
-        QuantumDetector getQuantumDetector();
+        Detector getDetector();
 
         Status setHypothesis(bool hypothesis);
 };

@@ -1,6 +1,6 @@
 #include "Simulator.hh"
 
-double Simulator::simulateDetector()
+double Simulator::simulateDetectorQuantum()
 {
     int N = 100;
     double Rc_totalSamplesSum = 0;
@@ -22,32 +22,78 @@ double Simulator::simulateDetector()
     return d.getDetectorMFValue();
 }
 
-Status Simulator::monteCarloSampling(int sampleRate)
+double Simulator::simulateDetectorClassical()
+{
+    int N = 100;
+    double Rc_totalSamplesSum = 0;
+    double Rs_totalSamplesSum = 0;
+
+    for(int n = 0; n < N; n++)
+    {
+        c.setHypothesis(hypothesis);
+        c.setParameters();
+        c.generateGaussianNorms();
+        c.generateSignalSamples();
+
+        Signals s = c.getSignalSamples();
+        Rc_totalSamplesSum += (s.i_1*s.i_2 - s.q_1*s.q_2);
+        Rs_totalSamplesSum += (s.i_1*s.i_2 + s.q_1*s.q_2);
+    }
+
+    d.computeMatchFilterDetection(Rc_totalSamplesSum, Rs_totalSamplesSum, (double)N);
+    return d.getDetectorMFValue();
+}
+
+
+Status Simulator::monteCarloSamplingQuantum(int sampleRate)
 {
     for(int n = 0; n < sampleRate; n++)
     {
-       decetorValues.push_back(simulateDetector());
+       qDecetorValues.push_back(simulateDetectorQuantum());
     }
     return SUCCESS;
 }
 
-Status Simulator::exportDetectorValues()
+Status Simulator::monteCarloSamplingClassical(int sampleRate)
+{
+    for(int n = 0; n < sampleRate; n++)
+    {
+       cDecetorValues.push_back(simulateDetectorClassical());
+    }
+    return SUCCESS;
+}
+
+Status Simulator::exportDetectorValues(string type)
 {
     string fileName = "";
-    if(q.getHypothesis() == true)
+    if(type == "quantum")
     {
-        fileName = "data/signalData_H0.csv";
+        if(q.getHypothesis() == true)
+            fileName = "data/quantum_DMF_data_H0.csv";
+        else
+            fileName = "data/quantum_DMF_data_H1.csv";
+        
+        ofstream file(fileName);
+        for(double n : qDecetorValues)
+        {
+            file << n <<endl;
+        }
     }
-    else
-    {
-        fileName = "data/signalData_H1.csv";
-    }
-    ofstream file(fileName);
     
-    for(double n : decetorValues)
+    if(type == "classical")
     {
-        file << n <<endl;
+        if(c.getHypothesis() == true)
+            fileName = "data/classical_DMF_data_H0.csv";
+        else
+            fileName = "data/classical_DMF_data_H1.csv";
+        
+        ofstream file(fileName);
+        for(double n : cDecetorValues)
+        {
+            file << n <<endl;
+        }
     }
+    
     return SUCCESS;
 }
 
@@ -56,7 +102,7 @@ QuantumRadar Simulator::getQuantumRadar()
     return q;
 }
 
-QuantumDetector Simulator::getQuantumDetector()
+Detector Simulator::getDetector()
 {
     return d;
 }

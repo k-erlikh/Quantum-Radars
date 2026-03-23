@@ -1,3 +1,9 @@
-# quant
-data/signalData_H0.csv
-data/signalData_H1.csv
+quant_x86
+quant_aarch64le
+
+data/quantum_DMF_data_H0.csv
+data/quantum_DMF_data_H1.csv
+data/classical_DMF_data_H0.csv
+data/classical_DMF_data_H1.csv
+
+node_modules
