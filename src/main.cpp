@@ -7,7 +7,7 @@ std::mt19937 gen(time(NULL));
 
 int main()
 {
-    int N = 10000;
+    int N = 100000;
 
     Simulator s_0;
     s_0.setHypothesis(true);
