@@ -2,8 +2,10 @@
 #include <random>
 #include <iostream>
 
-using namespace std;
-mt19937 gen(time(NULL));
+#ifndef BASERADAR_H
+#define BASERADAR_H
+
+extern std::mt19937 gen;
 
 typedef struct
 {
@@ -21,16 +23,12 @@ typedef struct
     double g4;
 } GaussianValues;
 
-#ifndef BASERADAR_H
-#define BASERADAR_H
-
 class BaseRadar
 {
     protected: 
         Signals sig;
         GaussianValues gaus;
         bool hypothesisNULL;
-
 
     public:
         BaseRadar(){};

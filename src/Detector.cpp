@@ -1,6 +1,6 @@
-#include "QuantumDetector.hh"
+#include "Detector.hh"
 
-Status QuantumDetector::computeMatchFilterDetection(double RcSum, double RsSum, double samples)
+Status Detector::computeMatchFilterDetection(double RcSum, double RsSum, double samples)
 {
     Rc = (1/samples)*(RcSum);
     Rs = (1/samples)*(RsSum);
@@ -9,12 +9,12 @@ Status QuantumDetector::computeMatchFilterDetection(double RcSum, double RsSum, 
     return SUCCESS;
 }
 
-double QuantumDetector::getDetectorMFValue()
+double Detector::getDetectorMFValue()
 {
     return detectorMF;
 }
 
-Status QuantumDetector::printValues()
+Status Detector::printValues()
 {
     cout<<"Detection Match Filtering Value: "<<detectorMF <<endl;
     return SUCCESS;

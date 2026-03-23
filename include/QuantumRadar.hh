@@ -8,7 +8,7 @@ typedef struct
     double sigma_2;
     double rho;
     double phi;
-} Parameters;
+} QParameters;
 
 #ifndef QUANTUMRADAR_H
 #define QUANTUMRADAR_H
@@ -16,16 +16,14 @@ typedef struct
 class QuantumRadar : public BaseRadar
 {
     private:
-        Parameters param;
+        QParameters param;
     
     public:
         QuantumRadar();
         ~QuantumRadar();
 
         Status generateSignalSamples();
-        Status setParameters();
-        Signals getSignalSamples();
-        
+        Status setParameters();    
 };
 
 #endif //QUANTUMRADAR_H

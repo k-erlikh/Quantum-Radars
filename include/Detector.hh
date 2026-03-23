@@ -5,10 +5,10 @@
 
 using namespace std;
 
-#ifndef QUANTUMDETECTOR_H
-#define QUANTUMDETECTOR_H
+#ifndef DETECTOR_H
+#define DETECTOR_H
 
-class QuantumDetector
+class Detector
 {
     private:
         double Rc;
@@ -22,4 +22,4 @@ class QuantumDetector
         double getDetectorMFValue();
 };
 
-#endif //QUANTUMDETECTOR_H
+#endif //DETECTOR_H

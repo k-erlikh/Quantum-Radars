@@ -10,7 +10,7 @@ typedef struct
     double sigma_2;
     double rho; // correlation coefficient
     double alpha; // attenuation reflection signal strength
-} Parameters;
+} CParameters;
 
 typedef struct
 {
@@ -24,7 +24,7 @@ typedef struct
 class ClassicalRadar : public BaseRadar
 {
     private:
-        Parameters param;
+        CParameters param;
         Noise noise;
 
     public:
@@ -32,7 +32,6 @@ class ClassicalRadar : public BaseRadar
         ~ClassicalRadar();
         Status generateSignalSamples();
         Status setParameters();       
-        Signals getSignalSamples();
 };
 
 #endif //CLASSICALRADAR_H

@@ -1,9 +1,12 @@
 #include "ClassicalRadar.hh"
 
+using namespace std;
+
 ClassicalRadar::ClassicalRadar()
 {
     sig = {0.0, 0.0, 0.0, 0.0};
     gaus = {0.0, 0.0, 0.0, 0.0};
+    param = {1.0, 1.0, 0.0, 0.0};
 
     generateGaussianNorms();
     setParameters();
@@ -17,7 +20,7 @@ Status ClassicalRadar::setParameters()
         param.rho = 0;
     else
     {
-        uniform_real_distribution<double> dist(nextafter(0.0, 1.0), nextafter(1.0, 0.0));
+        uniform_real_distribution<double> dist(nextafter(0.5, 1.0), nextafter(1.0, 0.5));
         param.rho = dist(gen);
     }
     
@@ -25,7 +28,7 @@ Status ClassicalRadar::setParameters()
     noise.n_i = dist(gen);
     noise.n_q = dist(gen);
 
-    param.alpha = 0.1; 
+    param.alpha = 0.01; 
 
     return SUCCESS;
 }
@@ -39,3 +42,5 @@ Status ClassicalRadar::generateSignalSamples()
 
     return SUCCESS;
 }
+
+
