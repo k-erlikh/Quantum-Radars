@@ -20,7 +20,7 @@ Status QuantumRadar::setParameters()
         param.rho = 0;
     else
     {
-        uniform_real_distribution<double> dist(nextafter(0.0, 1.0), nextafter(1.0, 0.0));
+        uniform_real_distribution<double> dist(nextafter(0.1, 0.7), nextafter(0.7, 0.1));
         param.rho = dist(gen);
     }
     return SUCCESS;
