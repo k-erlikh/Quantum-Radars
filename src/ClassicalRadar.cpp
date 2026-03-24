@@ -17,18 +17,12 @@ ClassicalRadar::~ClassicalRadar(){}
 Status ClassicalRadar::setParameters()
 {
     if(hypothesisNULL)
-        param.rho = 0;
+        param.alpha = 0;
     else
-    {
-        uniform_real_distribution<double> dist(nextafter(0.5, 1.0), nextafter(1.0, 0.5));
-        param.rho = dist(gen);
-    }
-    
+        param.alpha = 0.1;
     normal_distribution<double> dist(0.0,1.0);
     noise.n_i = dist(gen);
     noise.n_q = dist(gen);
-
-    param.alpha = 0.01; 
 
     return SUCCESS;
 }
