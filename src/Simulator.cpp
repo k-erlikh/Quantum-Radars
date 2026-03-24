@@ -15,7 +15,7 @@ double Simulator::simulateDetectorQuantum()
 
         Signals s = q.getSignalSamples();
         Rc_totalSamplesSum += (s.i_1*s.i_2 - s.q_1*s.q_2);
-        Rs_totalSamplesSum += (s.i_1*s.i_2 + s.q_1*s.q_2);
+        Rs_totalSamplesSum += (s.i_1*s.q_2 + s.q_1*s.i_2);
     }
 
     d.computeMatchFilterDetection(Rc_totalSamplesSum, Rs_totalSamplesSum, (double)N);
@@ -27,17 +27,17 @@ double Simulator::simulateDetectorClassical()
     int N = 100;
     double Rc_totalSamplesSum = 0;
     double Rs_totalSamplesSum = 0;
+    c.setParameters();
 
     for(int n = 0; n < N; n++)
     {
         c.setHypothesis(hypothesis);
-        c.setParameters();
         c.generateGaussianNorms();
         c.generateSignalSamples();
 
         Signals s = c.getSignalSamples();
-        Rc_totalSamplesSum += (s.i_1*s.i_2 - s.q_1*s.q_2);
-        Rs_totalSamplesSum += (s.i_1*s.i_2 + s.q_1*s.q_2);
+        Rc_totalSamplesSum += (s.i_1*s.i_2 + s.q_1*s.q_2);
+        Rs_totalSamplesSum += (s.i_1*s.q_2 - s.q_1*s.i_2);
     }
 
     d.computeMatchFilterDetection(Rc_totalSamplesSum, Rs_totalSamplesSum, (double)N);

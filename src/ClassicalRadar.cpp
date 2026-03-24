@@ -20,15 +20,16 @@ Status ClassicalRadar::setParameters()
         param.alpha = 0;
     else
         param.alpha = 0.1;
-    normal_distribution<double> dist(0.0,1.0);
-    noise.n_i = dist(gen);
-    noise.n_q = dist(gen);
 
     return SUCCESS;
 }
 
 Status ClassicalRadar::generateSignalSamples()
 {
+    normal_distribution<double> dist(0.0,1.0);
+    noise.n_i = dist(gen);
+    noise.n_q = dist(gen);
+    
     sig.i_1 = param.sigma_1 * gaus.g1;
     sig.q_1 = param.sigma_1 * gaus.g2;
     sig.i_2 = param.alpha*sig.i_1 + noise.n_i;
