@@ -1,5 +1,40 @@
 #include "Simulator.hh"
 
+Simulator::Simulator()
+{
+    detectorService = nullptr;
+    loggerService = nullptr;
+    hypothesis = true;
+}
+
+Status Simulator::setServices(DetectorService* detectorSvc, LoggerService* loggerSvc)
+{
+    detectorService = detectorSvc;
+    loggerService = loggerSvc;
+    return SUCCESS;
+}
+
+string Simulator::buildOutputFileName(const string& type)
+{
+    if (type == "quantum")
+    {
+        if (hypothesis == true)
+            return "data/quantum_DMF_data_H0.csv";
+        else
+            return "data/quantum_DMF_data_H1.csv";
+    }
+
+    if (type == "classical")
+    {
+        if (hypothesis == true)
+            return "data/classical_DMF_data_H0.csv";
+        else
+            return "data/classical_DMF_data_H1.csv";
+    }
+
+    return "data/output.csv";
+}
+
 double Simulator::simulateDetectorQuantum()
 {
     int N = 100;
@@ -16,6 +51,11 @@ double Simulator::simulateDetectorQuantum()
         Signals s = q.getSignalSamples();
         Rc_totalSamplesSum += (s.i_1*s.i_2 - s.q_1*s.q_2);
         Rs_totalSamplesSum += (s.i_1*s.q_2 + s.q_1*s.i_2);
+    }
+
+    if (detectorService != nullptr)
+    {
+        return detectorService->sendAndWait(Rc_totalSamplesSum, Rs_totalSamplesSum, (double)N);
     }
 
     d.computeMatchFilterDetection(Rc_totalSamplesSum, Rs_totalSamplesSum, (double)N);
@@ -38,6 +78,11 @@ double Simulator::simulateDetectorClassical()
         Signals s = c.getSignalSamples();
         Rc_totalSamplesSum += (s.i_1*s.i_2 + s.q_1*s.q_2);
         Rs_totalSamplesSum += (s.i_1*s.q_2 - s.q_1*s.i_2);
+    }
+
+    if (detectorService != nullptr)
+    {
+        return detectorService->sendAndWait(Rc_totalSamplesSum, Rs_totalSamplesSum, (double)N);
     }
 
     d.computeMatchFilterDetection(Rc_totalSamplesSum, Rs_totalSamplesSum, (double)N);
@@ -65,32 +110,42 @@ Status Simulator::monteCarloSamplingClassical(int sampleRate)
 
 Status Simulator::exportDetectorValues(string type)
 {
-    string fileName = "";
+    string fileName = buildOutputFileName(type);
     if(type == "quantum")
     {
-        if(q.getHypothesis() == true)
-            fileName = "data/quantum_DMF_data_H0.csv";
-        else
-            fileName = "data/quantum_DMF_data_H1.csv";
-        
-        ofstream file(fileName);
-        for(double n : qDecetorValues)
+        if(loggerService != nullptr)
         {
-            file << n <<endl;
+            for (double n : qDecetorValues)
+            {
+                loggerService->logValue(fileName, n);
+            }
+        }
+        else
+        {
+            ofstream file(fileName);
+            for(double n : qDecetorValues)
+            {
+                file << n <<endl;
+            }
         }
     }
     
     if(type == "classical")
     {
         if(c.getHypothesis() == true)
-            fileName = "data/classical_DMF_data_H0.csv";
-        else
-            fileName = "data/classical_DMF_data_H1.csv";
-        
-        ofstream file(fileName);
-        for(double n : cDecetorValues)
         {
-            file << n <<endl;
+            for (double n : cDecetorValues)
+            {
+                loggerService->logValue(fileName, n);
+            }
+        }
+        else
+        {
+            ofstream file(fileName);
+            for(double n : cDecetorValues)
+            {
+                file << n <<endl;
+        }
         }
     }
     
@@ -110,5 +165,7 @@ Detector Simulator::getDetector()
 Status Simulator::setHypothesis(bool hypothesis)
 {
     this->hypothesis = hypothesis;
+    q.setHypothesis(hypothesis);
+    c.setHypothesis(hypothesis);
     return SUCCESS;
 }

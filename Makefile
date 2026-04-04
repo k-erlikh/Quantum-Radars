@@ -1,11 +1,13 @@
-SRC_x86 = src/sim.cpp src/BaseRadar.cpp src/QuantumRadar.cpp src/Detector.cpp src/Simulator.cpp src/ClassicalRadar.cpp
+SRC = src/sim.cpp src/BaseRadar.cpp src/QuantumRadar.cpp src/Detector.cpp src/Simulator.cpp src/ClassicalRadar.cpp src/Logger.cpp
+SRC_x86 = src/sim.cpp src/BaseRadar.cpp src/QuantumRadar.cpp src/Detector.cpp src/Simulator.cpp src/ClassicalRadar.cpp src/Logger.cpp
+
 INCLUDES = -I./include
-COMMONFLAGS = $(INCLUDES) -O2 -Wall
+COMMONFLAGS = $(INCLUDES) -std=c++11 -O2 -Wall
 
 AARCH64_CXX = q++
 AARCH64_FLAGS = -Vgcc_ntoaarch64le
 
-X86_CXX = g++
+X86_CXX = q++
 X86_FLAGS = -Vgcc_ntox86_64
 
 all: quant_aarch64le quant_x86
@@ -14,7 +16,7 @@ quant_aarch64le:
 	$(AARCH64_CXX) $(AARCH64_FLAGS) $(COMMONFLAGS) $(SRC) -o quant_aarch64le
 
 quant_x86:
-	$(X86_CXX) $(COMMONFLAGS) $(SRC_x86) -o quant_x86
+	$(X86_CXX) $(X86_FLAGS) $(COMMONFLAGS) $(SRC_x86) -o quant_x86
 
 clean:
 	rm -f quant_aarch64le quant_x86

@@ -2,6 +2,7 @@
 #include "Detector.hh"
 #include "QuantumRadar.hh"
 #include "ClassicalRadar.hh"
+#include "Logger.hh"
 #include <vector>
 #include <string>
 #include <fstream>
@@ -21,9 +22,17 @@ class Simulator
         ClassicalRadar c;
         Detector d;
 
+        DetectorService* detectorService;
+        LoggerService* loggerService;
+
+
         bool hypothesis;
 
+        string buildOutputFileName(const string& type);
+
     public:
+        Simulator();
+
         Status exportDetectorValues(string type);
 
         Status monteCarloSamplingQuantum(int sampleRate);
@@ -36,6 +45,7 @@ class Simulator
         Detector getDetector();
 
         Status setHypothesis(bool hypothesis);
+        Status setServices(DetectorService* detectorSvc, LoggerService* loggerSvc);
 };
 
 #endif
