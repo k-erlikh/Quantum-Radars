@@ -30,8 +30,8 @@ Status QuantumRadar::generateSignalSamples()
 {
     sig.i_1 = param.sigma_1 * gaus.g1;
     sig.q_1 = param.sigma_1 * gaus.g2;
-    sig.i_2 = param.rho * param.sigma_2 * gaus.g1 + sqrt((1-(param.rho*param.rho)))*param.sigma_2 * gaus.g3;
-    sig.q_2 = -param.rho * param.sigma_2 * gaus.g2 + sqrt((1-(param.rho*param.rho)))*param.sigma_2 * gaus.g4;
+    sig.i_2 = param.rho * param.sigma_1 * gaus.g1 + sqrt((1-(param.rho*param.rho)))*param.sigma_2 * gaus.g3;
+    sig.q_2 = -param.rho * param.sigma_1 * gaus.g2 + sqrt((1-(param.rho*param.rho)))*param.sigma_2 * gaus.g4;
     return SUCCESS;
 }
 
